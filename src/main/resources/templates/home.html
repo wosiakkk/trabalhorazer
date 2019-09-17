@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 	<!--Import Google Icon Font-->
@@ -31,21 +31,13 @@
 		<!-- Painel de navegação à esquerda -->
 		<div class="col s3">
 			<div class="collection">
-       			<a href="#!" class="collection-item active">Início</a>
-        		<a href="#!" class="collection-item " onclick="carregar('teste')">Cadastro de Clientes</a>
-        		<a href="#!" class="collection-item">Alvin</a>
-        		<a href="#!" class="collection-item">Alvin</a>
+				<a href="#!" class="collection-item active" onclick="carregar('bemvindo')">Início</a>
+				<a id="cadastro" href="#!" class="collection-item "  onclick="carregar('teste')" sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
       		</div>
 		</div>
 		<!-- Conteúdo da página principal -->
 		<div class="col s9" id="conteudo">
-				<div class="container">
-		<h1 th:inline="text">Bem Vindo [[${#httpServletRequest.remoteUser}]]</h1>
-		<p>Clique aqui para ir a pagina de secretario, <a th:href="@{/restrito}">ir</a>
-		<form th:action="@{/logout}" method="post">
-			<input type="submit" value="Sign Out" />
-		</form>
-	</div>
+			
 		</div>
 	</div>
 	
@@ -58,6 +50,11 @@
    		$('.collection-item').click(function() {
    		    $(this).addClass('active').siblings().removeClass('active');
    		});
+ 		
+ 		$(document).ready(function () {
+ 			$("#conteudo").load('bemvindo');
+		});
+ 		
 	</script>
 	
 </body>
