@@ -3,18 +3,52 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
         <title>Spring Security Example </title>
+        <!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!--Import materialize.css CDN-->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </head>
     <body>
-        <div th:if="${param.error}">
-            Invalid username and password.
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out.
-        </div>
-        <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username"/> </label></div>
-            <div><label> Password: <input type="password" name="password"/> </label></div>
-            <div><input type="submit" value="Sign In"/></div>
-        </form>
+    	<nav>
+			<div class="nav-wrapper #26a69a teal lighten-1">
+				<div class="col s12 ">
+					<a href="#" class="brand-logo right">JavaWeb</a>
+				</div>
+			</div>
+		</nav>
+    	<div class="container">
+	    	<h1>Acesso ao Sistema</h1>
+	        <div th:if="${param.error}">
+	            Login ou senha inválidos.
+	        </div>
+	        <div th:if="${param.logout}">
+	            Você efetuou logout.
+	        </div>
+	        <div class="col s12 m4 l2"></div>
+	        <form th:action="@{/login}" method="post" class="s12 m4 l8">
+	            <div class="row">
+	            	<div class="input-field s12 m4 l8">
+	            		<label class="active" for="login">Login:</label>
+	            		<input type="text" name="username" id="login"/> 
+	            	</div>
+	            </div>
+	            <div class="row">
+	            	<div class="input-field s12 m4 l8">
+	            		<label class="active" for="senha">Senha:</label>
+	           			 <input type="password" name="password" id="senha"/>
+	           		</div> 
+	           	</div>
+	          	<div class="row">
+					<div class="input-field s12 m4 l8">
+						<button type="submit" class="btn waves-effect waves-light">Logar</button>	
+					</div>
+				</div>
+	        </form>
+	        <div class="col s12 m4 l2"></div>
+	 	</div>
     </body>
 </html>

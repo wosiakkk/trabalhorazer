@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+    	<meta charset="UTF-8">
+        <title>Trabalho pós</title>
+        <!--Import Google Icon Font-->
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css CDN-->
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+		<!-- Compiled and minified JavaScript -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </head>
+    <body>
+    	<nav>
+			<div class="nav-wrapper #26a69a teal lighten-1">
+				<div class="col s12 ">
+				<a href="#" class="brand-logo right">JavaWeb</a>
+					<a  th:href="@{/login}" class="breadcrumb" >  Login</a>
+				</div>
+			</div>
+		</nav>
+    	<div class="container">
+        	<h2>Trabalho da disciplina de java web da pós-graduação</h2>
+        	<p>Utilizado no sistema: SpringBoot, Spring Security, Spring MVC, Thymeleaf Materialize CSS e PostegreSQL</p>
+        	<p>Efetuar  <a th:href="@{/login}">Login</a></p>
+		</div>
+    </body>
+</html>

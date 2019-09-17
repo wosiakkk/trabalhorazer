@@ -15,11 +15,11 @@ public class Application implements WebMvcConfigurer{
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 
-		registry.addViewController("/home").setViewName("/home");
-		registry.addViewController("/").setViewName("home");
+		registry.addViewController("/index").setViewName("/index");
+		registry.addViewController("/").setViewName("index");
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/hello").setViewName("hello");
-		registry.addViewController("/bemvindo").setViewName("bemvindo");
+		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/restrito").setViewName("restrito");
 		registry.addViewController("/acessonegado").setViewName("acessonegado");
 		

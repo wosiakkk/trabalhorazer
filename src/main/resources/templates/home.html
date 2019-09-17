@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Security Example</title>
-    </head>
-    <body>
-        <h1>Welcome!</h1>
-
-    </body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css CDN-->
+	<!-- Compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<title>Home</title>
+</head>
+<body>
+	<!-- Barra de navegação -->
+	<nav>
+		<div class="nav-wrapper #26a69a teal lighten-1">
+			<div class="col s12 ">
+				<a href="#" class="brand-logo right">JavaWeb</a>
+				<a th:href="@{/logout}" class="breadcrumb">Logout</a>
+			</div>
+		</div>
+	</nav>
+	
+	<!-- Layout da página aqui -->
+	<div class="row">
+		<!-- Painel de navegação à esquerda -->
+		<div class="col s3">
+			<div class="collection">
+       			<a href="#!" class="collection-item">Início</a>
+        		<a href="#!" class="collection-item ">Alvin</a>
+        		<a href="#!" class="collection-item">Alvin</a>
+        		<a href="#!" class="collection-item">Alvin</a>
+      		</div>
+		</div>
+		<!-- Conteúdo da página principal -->
+		<div class="col s9">
+				<div class="container">
+		<h1 th:inline="text">Bem Vindo [[${#httpServletRequest.remoteUser}]]</h1>
+		<p>Clique aqui para ir a pagina de secretario, <a th:href="@{/restrito}">ir</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" />
+		</form>
+	</div>
+		</div>
+	</div>
+	
+	
+	
+</body>
 </html>

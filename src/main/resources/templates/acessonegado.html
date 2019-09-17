@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!--Import materialize.css CDN-->
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
 <title>Acesso negado</title>
 </head>
 <body>
-<h1>Acesso negado, você não tem permissão.</h1>
-<p> Clique aqui para voltar ao login, <a th:href="@{/login}" >ir</a>
+	<nav>
+		<div class="nav-wrapper #26a69a teal lighten-1">
+			<div class="col s12 ">
+				<a href="#" class="brand-logo right">JavaWeb</a>
+				<a th:href="@{/login}" class="breadcrumb">Login</a>
+				<a th:href="@{/logout}" class="breadcrumb">Logout</a>
+				<a href="#!" class="breadcrumb">Third</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="col s6">
+			<p>Acesso negado, você não tem permissão.</p>
+			<p>
+				Clique aqui para voltar ao login, <a th:href="@{/login}">ir</a>
+		</div>
+	</div>
+
 </body>
 </html>
