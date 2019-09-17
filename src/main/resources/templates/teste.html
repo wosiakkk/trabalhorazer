@@ -11,43 +11,66 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="col s9">
-			<h2>Cadastro de Clientes</h2>
-			<div class="row">
-				<form id="formCliente" th:action="@{/salvar}" method="POST"  class="col s9">
+	<!-- Barra de navegação -->
+	<div id="navbar"></div>
+	
+	<!-- Layout da página aqui -->
+	<div class="row">
+		<!-- Painel de navegação à esquerda -->
+		<div class="col s3">
+			<div class="collection">
+				<a th:href="@{/home}" class="collection-item">Início</a>
+				<a th:href="@{/teste}" class="collection-item active" sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
+      		</div>
+		</div>
+		
+		<!-- Conteúdo da página principal -->
+		<div class="col s9" id="conteudo">
+			<div class="container">
+				<div class="col s9">
+					<h2>Cadastro de Clientes</h2>
 					<div class="row">
-						<div class="input-field col s9">
-							<label for="id" class="active">ID:</label>
-							<input type="text" name="id" id="id" readonly="readonly">
-						</div>
-						<div class="input-field col s9">
-							<label for="cpf" class="active">CPF:</label>
-							<input type="text" name="cpf" id="cpf"  class="validate" placeholder="Insira o cpf">
-						</div>
-						<div class="input-field col s9">
-							<label for="nome" class="active">Nome:</label>
-							<input type="text" name="nome" id="nome"  class="validate" placeholder="Insira o nome">
-						</div>
-						<div class="input-field col s9">
-							<label for="sobrenome" class="active">Sobrenome:</label>
-							<input type="text" name="sobrenome" id="sobrenome"  class="validate" placeholder="Insira o sobrenome">
-						</div>
-						<div class="input-field col s6">
-							<button class="btn waves-effect waves-light" type="submit" name="action">
-								Salvar <i class="material-icons right">send</i>
-							</button>
-							<button class="btn waves-effect waves-light"
-								onclick="document.getElementById('formCliente').reset();">Novo
-							</button>
-						</div>
+						<form id="formCliente" th:action="@{/salvar}" method="POST"  class="col s9">
+							<div class="row">
+								<div class="input-field col s9">
+									<label for="id" class="active">ID:</label>
+									<input type="text" name="id" id="id" readonly="readonly">
+								</div>
+								<div class="input-field col s9">
+									<label for="cpf" class="active">CPF:</label>
+									<input type="text" name="cpf" id="cpf"  class="validate" placeholder="Insira o cpf">
+								</div>
+								<div class="input-field col s9">
+									<label for="nome" class="active">Nome:</label>
+									<input type="text" name="nome" id="nome"  class="validate" placeholder="Insira o nome">
+								</div>
+								<div class="input-field col s9">
+									<label for="sobrenome" class="active">Sobrenome:</label>
+									<input type="text" name="sobrenome" id="sobrenome"  class="validate" placeholder="Insira o sobrenome">
+								</div>
+								<div class="input-field col s6">
+									<button class="btn waves-effect waves-light" type="submit" name="action">
+										Salvar <i class="material-icons right">send</i>
+									</button>
+									<button class="btn waves-effect waves-light"
+										onclick="document.getElementById('formCliente').reset();">Novo
+									</button>
+								</div>
+							</div>
+						</form>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>
+	<script type = "text/javascript">
+ 		$(document).ready(function() {
+ 		    $('#navbar').load('navbar');
+ 		});
+	</script>
 </body>
 </html>

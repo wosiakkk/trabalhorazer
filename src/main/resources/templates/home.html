@@ -16,28 +16,27 @@
 <title>Home</title>
 </head>
 <body>
-	<!-- Barra de navegação -->
-	<nav>
-		<div class="nav-wrapper #26a69a teal lighten-1">
-			<div class="col s12 ">
-				<a href="#" class="brand-logo right">JavaWeb</a>
-				<a th:href="@{/logout}" class="breadcrumb">Logout</a>
-			</div>
-		</div>
-	</nav>
 	
+    <div id="navbar"></div>
+  
 	<!-- Layout da página aqui -->
 	<div class="row">
 		<!-- Painel de navegação à esquerda -->
 		<div class="col s3">
 			<div class="collection">
 				<a href="#!" class="collection-item active" onclick="carregar('bemvindo')">Início</a>
-				<a id="cadastro" href="#!" class="collection-item "  onclick="carregar('teste')" sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
+				<a th:href="@{/teste}" class="collection-item " sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
       		</div>
 		</div>
 		<!-- Conteúdo da página principal -->
 		<div class="col s9" id="conteudo">
-			
+			<div class="container">
+				<h2 th:inline="text" class="left-align">Bem Vindo, [[${#httpServletRequest.remoteUser}]]</h2>
+				Clique aqui para ir a pagina de secretario, <a th:href="@{/restrito}">ir</a>
+				<form th:action="@{/logout}" method="post">
+					<input type="submit" value="Sign Out" />
+				</form>
+			</div>
 		</div>
 	</div>
 	
@@ -54,7 +53,9 @@
  		$(document).ready(function () {
  			$("#conteudo").load('bemvindo');
 		});
- 		
+ 		$(document).ready(function() {
+ 		    $('#navbar').load('navbar');
+ 		});
 	</script>
 	
 </body>
