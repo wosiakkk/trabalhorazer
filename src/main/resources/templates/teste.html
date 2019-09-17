@@ -52,7 +52,7 @@
 									<label for="sobrenome" class="active">Sobrenome:</label>
 									<input type="text" name="sobrenome" id="sobrenome"  class="validate" placeholder="Insira o sobrenome">
 								</div>
-								<div class="input-field col s6">
+								<div class="input-field col s9">
 									<button class="btn waves-effect waves-light" type="submit" name="action">
 										Salvar <i class="material-icons right">send</i>
 									</button>
@@ -63,6 +63,15 @@
 							</div>
 						</form>
 					</div>
+					<a href="/listaclientes">Lista Pessoas</a>
+					<table>
+					<tr th:each = "cliente : ${clientes}"><!-- foreach do thymeleaf, recuperando alista do bd pessoas e jogando em varipaveis pessoa -->
+						<td th:text = ${cliente.id}></td>
+						<td th:text = ${cliente.nome}></td>
+						<td th:text = ${cliente.sobrenome}></td>
+						<td th:text = ${cliente.cpf}></td>
+					</tr>
+				</table>
 				</div>
 			</div>
 		</div>

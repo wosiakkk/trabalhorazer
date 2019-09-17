@@ -25,7 +25,14 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.POST, value = "/salvar")
 	public String salvar(Cliente cliente) {
 		clienteRepository.save(cliente);
-			return "/home";
-		}
+		return "/home";
+	}
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/listaclientes")
+	public ModelAndView listarClientes() {
+		ModelAndView modelAndView = new ModelAndView("/teste");
+		Iterable<Cliente> clientes = clienteRepository.findAll();
+		modelAndView.addObject("clientes", clientes);
+		return modelAndView;
+	}
 }
