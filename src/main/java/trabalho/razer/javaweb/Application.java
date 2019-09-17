@@ -5,8 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
-
 @SpringBootApplication
 public class Application implements WebMvcConfigurer{
 
@@ -23,6 +21,7 @@ public class Application implements WebMvcConfigurer{
 		registry.addViewController("/hello").setViewName("hello");
 		registry.addViewController("/bemvindo").setViewName("bemvindo");
 		registry.addViewController("/restrito").setViewName("restrito");
+		registry.addViewController("/acessonegado").setViewName("acessonegado");
 		
 	}
 

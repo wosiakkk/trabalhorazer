@@ -1,27 +1,29 @@
 package trabalho.razer.javaweb.security;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private ImplementacaoUserDetailService implementacaoUserDetailService;
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
 		.antMatchers("/", "/home").permitAll()
-		.antMatchers("/restrito").hasAnyRole("SECRETARIO")
+		.antMatchers("/restrito").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
+		.and()
+		.exceptionHandling().accessDeniedPage("/acessonegado")
 		.and()
 		.formLogin()
 		.loginPage("/login")
@@ -31,17 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.logout().permitAll();
 		
 	}
+
 	
-	/*teste do spring security utilizando um usuário em memória*/
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails user = User.withDefaultPasswordEncoder()
-								.username("admin")
-								.password("senha123")
-								.roles("SECRETARIO").build();
-		
-		return  new InMemoryUserDetailsManager(user);
+	
+	@Override //Cria a autenticação do usuário com banco de dados ou em memória
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		/*Realizando a autenticação com o banco de dados e com criptografia na senha*/
+		auth.userDetailsService(implementacaoUserDetailService)
+		.passwordEncoder(new BCryptPasswordEncoder());
 	}
 	
 }
