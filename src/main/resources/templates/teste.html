@@ -63,8 +63,8 @@
 							</div>
 						</form>
 					</div>
-					<a href="/listaclientes">Lista Pessoas</a>
-					<table>
+					<h3 class="center-align">Lista de Clientes</h3>
+					<table class="striped">
 					<tr th:each = "cliente : ${clientes}"><!-- foreach do thymeleaf, recuperando alista do bd pessoas e jogando em varipaveis pessoa -->
 						<td th:text = ${cliente.id}></td>
 						<td th:text = ${cliente.nome}></td>

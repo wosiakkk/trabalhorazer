@@ -16,16 +16,25 @@ public class ClienteController {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/teste")
-	public String inicio() {
-		return "teste";
+	public ModelAndView inicio() {
+		/*Carregando a lista de usuários ao acessar pela primera vez a página do cliente*/
+		ModelAndView modelAndView = new ModelAndView("/teste");
+		Iterable<Cliente> clientes = clienteRepository.findAll();
+		modelAndView.addObject("clientes", clientes);
+		return modelAndView;
 	}
 	
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/salvar")
-	public String salvar(Cliente cliente) {
+	public ModelAndView salvar(Cliente cliente) {
 		clienteRepository.save(cliente);
-		return "/home";
+		/*Carregando a lista de usuários após salvar*/
+		ModelAndView modelAndView = new ModelAndView("/teste");
+		Iterable<Cliente> clientes = clienteRepository.findAll();
+		modelAndView.addObject("clientes", clientes);
+		return modelAndView;
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/listaclientes")
