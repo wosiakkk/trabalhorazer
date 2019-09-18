@@ -1,9 +1,15 @@
 package trabalho.razer.javaweb.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,10 +39,48 @@ public class ClienteController {
 		return modelAndView;
 	}
 	
-	/*Método para salvar um cliente. Ao final recarrega a lista de clientes atualizada*/
+	/*Método para salvar um cliente. Ao final recarrega a lista de clientes atualizada.
+	 *A anotação @Valid ativa  a validação implementada pelas anotações no model de cliente, e
+	 *o objeto BindingResult irá retornar os erros das validações */
 	@RequestMapping(method = RequestMethod.POST, value = "/salvar")
-	public ModelAndView salvar(Cliente cliente) {
-		clienteRepository.save(cliente);
+	public ModelAndView salvar(@Valid Cliente cliente, BindingResult bindingResult) {
+		
+		/*Verificando inicialmente se houve erros de validação*/
+		if(bindingResult.hasErrors()) {
+			ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
+			Iterable<Cliente> clientes = clienteRepository.findAll();
+			modelAndView.addObject("clientes", clientes);
+			/*Como houe erro, carrega para a mesma tela com o mesmo obj preenchido inicialmente pelo usuário*/
+			modelAndView.addObject("clienteobj", cliente);
+			/*Criando uma lista para armazenar as mensagens de erros*/
+			List<String> msg = new ArrayList<>();
+			/*varrendo a lista de erros do binding e setando em um objeto de erro com lambda (ObjectErro é o retorno do métodos
+			 * getAllErrors)*/
+			bindingResult.getAllErrors().forEach(objectError-> msg.add(objectError.getDefaultMessage()));
+			//add a lista de erros
+			modelAndView.addObject("msg", msg);	
+			//retornando
+			return modelAndView;
+		}
+		/*caso n dê erros de validações o método executa como anteriormente,
+		 * entretanto ainda pode haver um erro de violação de cpf, no qual deve ser único no bd,
+		 * com isso o método save do jpa é tratado com try catch*/
+		try {
+			clienteRepository.save(cliente);
+		} catch (DataIntegrityViolationException e) {
+			//imprimendo a causa do erro no console para verificação
+			System.out.println(e.getCause());
+			//realizando um novo reotnro com a mensagem de erro
+			ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
+			Iterable<Cliente> clientes = clienteRepository.findAll();
+			modelAndView.addObject("clientes", clientes);
+			modelAndView.addObject("clienteobj", cliente);
+			List<String> msg = new ArrayList<>();
+			msg.add("O CPF informado já foi cadastrado.");
+			modelAndView.addObject("msg", msg);	
+			return modelAndView;
+		}
+			
 		/*Carregando a lista de usuários após salvar*/
 		ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
 		Iterable<Cliente> clientes = clienteRepository.findAll();

@@ -7,8 +7,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"cpf"})} )
 public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,10 +22,19 @@ public class Cliente implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false)
+	
+	@NotEmpty(message = "O CPF não pode ser vazio!")
+	@NotNull(message = "O CPF não pode ser nulo!")
+	@Column(nullable = false, unique = true)
 	private String cpf;
+	
+	@NotEmpty(message = "O Nome não pode ser vazio!")
+	@NotNull(message = "O Nome não pode ser nulo!")
 	@Column(nullable = false)
 	private String nome;
+	
+	@NotEmpty(message = "O Sobrenome não pode ser vazio!")
+	@NotNull(message = "O Sobrenome não pode ser nulo!")
 	@Column(nullable = false)
 	private String sobrenome;
 	/*###########################*/

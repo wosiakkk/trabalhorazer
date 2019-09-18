@@ -33,6 +33,15 @@
 			<div class="container">
 				<div class="col s9">
 					<h2>Cadastro de Clientes</h2>
+					
+					<!-- Div para exbir mensagens de validações do back-end -->
+					<br/>
+					<!-- Varrendo a lista de erros com thymeleaf --> 
+					<div th:each = "m : ${msg}">
+						<span th:text = "${m}"></span>
+					</div>
+					<br/>
+					
 					<div class="row">
 						<form id="formCliente" th:action="@{/salvar}" method="POST" th:object="${clienteobj}" class="col s9">
 							<div class="row">
