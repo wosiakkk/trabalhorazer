@@ -75,6 +75,7 @@
 						<td th:text = ${cliente.cpf}></td>
 						<!-- Passando um parâmetro com thymeleaf por link para o back -->
 						<td><a th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">Editar</a></td>
+						<td><a th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">Excluir</a></td>
 					</tr>
 				</table>
 				</div>

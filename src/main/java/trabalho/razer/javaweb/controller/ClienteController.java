@@ -41,12 +41,12 @@ public class ClienteController {
 		ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
 		Iterable<Cliente> clientes = clienteRepository.findAll();
 		modelAndView.addObject("clientes", clientes);
-		/*Evitasndo erro de objeto nulo(necessário após realizar o método de edição)*/
+		/*Evitando erro de objeto nulo(necessário após realizar o método de edição)*/
 		modelAndView.addObject("clienteobj", new Cliente());
 		return modelAndView;
 	}
 	
-	/*Método para edição. Basicamente vai pegar a id do datatable referente ao clicque do botão,
+	/*Método para edição. Basicamente vai pegar a id do datatable referente ao clique do link,
 	 * pesquisar o usuário e setar no form de save para ser editado e ir ao método de salvar novamente*/
 	@GetMapping("/editarcliente/{idcliente}")
 	public ModelAndView editar(@PathVariable("idcliente") Long idcliente) {
@@ -56,6 +56,23 @@ public class ClienteController {
 		ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
 		/*Add o objeto carregado no obj modelandview no formulário de cadastro.*/
 		modelAndView.addObject("clienteobj", cliente.get());
+		/*Carregando a lista de usuários após editar*/
+		Iterable<Cliente> clientes = clienteRepository.findAll();
+		modelAndView.addObject("clientes", clientes);
+		/*retornando*/
+		return modelAndView;
+	}
+	
+	/*Método para exclusão de cliente, que vai interceptar a requisição get com o id
+	 * passado como parâmetro através do link de exclusão da datatable de clientes*/
+	@GetMapping("/excluircliente/{idcliente}")
+	public ModelAndView excluir(@PathVariable("idcliente") Long idcliente) {
+		/*Efetuando a exlusão*/
+		clienteRepository.deleteById(idcliente);
+		/*Definindo a página de retorno, no qual será a mesma página*/
+		ModelAndView modelAndView = new ModelAndView("/cadastrocliente");
+		/*Evitando erro de objeto nulo(necessário após realizar o método de edição)*/
+		modelAndView.addObject("clienteobj", new Cliente());
 		/*Carregando a lista de usuários após editar*/
 		Iterable<Cliente> clientes = clienteRepository.findAll();
 		modelAndView.addObject("clientes", clientes);
