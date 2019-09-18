@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.authorizeRequests() //Permitir restringir acessos
 		.antMatchers("/", "/index").permitAll() //Dando acesso total a page inicial
-		.antMatchers("/teste").hasAnyRole("ADMIN") //Restringindo acesso a uma página de acrodo com alguma role
+		.antMatchers("/cadastrocliente").hasAnyRole("ADMIN") //Restringindo acesso a uma página de acrodo com alguma role
 		.anyRequest().authenticated()
 		.and()
 		.exceptionHandling().accessDeniedPage("/acessonegado") //Definindo a página de acesso negado

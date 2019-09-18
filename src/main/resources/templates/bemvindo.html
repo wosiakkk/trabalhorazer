@@ -1,9 +1,0 @@
-<div class="container">
-	<h2 th:inline="text" class="left-align">Bem Vindo,
-		[[${#httpServletRequest.remoteUser}]]</h2>
-	<p>
-		Clique aqui para ir a pagina de secretario, <a th:href="@{/restrito}">ir</a>
-	<form th:action="@{/logout}" method="post">
-		<input type="submit" value="Sign Out" />
-	</form>
-</div>

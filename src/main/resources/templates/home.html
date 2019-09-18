@@ -25,34 +25,28 @@
 		<div class="col s3">
 			<div class="collection">
 				<a href="#!" class="collection-item active" onclick="carregar('bemvindo')">Início</a>
-				<a th:href="@{/teste}" class="collection-item " sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
+				<a th:href="@{/cadastrocliente}" class="collection-item " sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
       		</div>
 		</div>
 		<!-- Conteúdo da página principal -->
 		<div class="col s9" id="conteudo">
 			<div class="container">
-				<h2 th:inline="text" class="left-align">Bem Vindo, [[${#httpServletRequest.remoteUser}]]</h2>
-				Clique aqui para ir a pagina de secretario, <a th:href="@{/restrito}">ir</a>
-				<form th:action="@{/logout}" method="post">
-					<input type="submit" value="Sign Out" />
-				</form>
+				<h3 th:inline="text" class="left-align">Bem Vindo, [[${#httpServletRequest.remoteUser}]]</h3>
+				<!-- Card do materialize com uma breve descrição -->
+				<div class="row">
+					<div class="col s9">
+						<div class="card-panel #26a69a teal lighten-1">
+							<span class="white-text">Trabalho da disciplina de java web da pós-graduação.
+								Utilizado no sistema: SpringBoot, Spring Security, Spring MVC,
+								 Thymeleaf Materialize CSS e PostegreSQL</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	
 	<script type = "text/javascript">
- 		//Função para carregar páginas inteiras na div de conteúdo da home
-   		 function carregar(pagina){
-       		$("#conteudo").load(pagina);
-   		 }
- 		//Função para alterar a classe active do navbar de acordo com a navegação
-   		$('.collection-item').click(function() {
-   		    $(this).addClass('active').siblings().removeClass('active');
-   		});
- 		
- 		$(document).ready(function () {
- 			$("#conteudo").load('bemvindo');
-		});
  		$(document).ready(function() {
  		    $('#navbar').load('navbar');
  		});
