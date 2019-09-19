@@ -29,6 +29,8 @@ public class ProdutoController {
 	public ModelAndView inicio() {
 		ModelAndView modelAndView = new ModelAndView("/cadastroproduto");
 		modelAndView.addObject("produtoobj", new Produto());
+		Iterable<Produto> produtos = produtoRepository.findAll();
+		modelAndView.addObject("produtos", produtos);
 		return modelAndView;
 	}
 	
