@@ -2,6 +2,7 @@ package trabalho.razer.javaweb.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -9,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javassist.expr.NewArray;
 import trabalho.razer.javaweb.model.Produto;
 import trabalho.razer.javaweb.repository.ProdutoRepository;
 
@@ -24,41 +25,83 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 	
-	
+	/*MÉTODO INICIAL DA PÁGINA*/
 	@GetMapping(value = "/cadastroproduto")
 	public ModelAndView inicio() {
-		ModelAndView modelAndView = new ModelAndView("/cadastroproduto");
-		modelAndView.addObject("produtoobj", new Produto());
-		Iterable<Produto> produtos = produtoRepository.findAll();
-		modelAndView.addObject("produtos", produtos);
-		return modelAndView;
+		return MontagemModelAndView("/cadastroproduto", new Produto(), null, null);
 	}
 	
 	
-	
+	/*MÉTODO DE SAVE*/
 	@PostMapping(value = "/salvarproduto")
 	public ModelAndView salvar(@Valid Produto produto, BindingResult bindingResult) {
 		
 		if(bindingResult.hasErrors()) {
-			/*Há erros de valçidação*/
-			ModelAndView modelAndView = new ModelAndView("/cadastroproduto");
-			modelAndView.addObject("produtoobj",produto);
+			/*Há erros de validação, setando as mensagens em list*/		
 			List<String> msg = new ArrayList<String>();
 			bindingResult.getAllErrors().forEach(objError -> msg.add(objError.getDefaultMessage()));
-			modelAndView.addObject("msg", msg);
-			return modelAndView;
+			
+			return MontagemModelAndView("/cadastroproduto", produto, null, msg);
 		}
-		ModelAndView modelAndView = new ModelAndView("/cadastroproduto");
-		produtoRepository.save(produto);
-		modelAndView.addObject("produtoobj", new Produto());
-		List<String> msgSucesso = new ArrayList<String>();
-		msgSucesso.add("Produto salvo com sucesso!");
-		modelAndView.addObject("msgSucesso", msgSucesso);
-		return modelAndView;
+		try {
+			produtoRepository.save(produto);
+			List<String> msgSucesso = new ArrayList<String>();
+			msgSucesso.add("Produto salvo com sucesso!");
+			return MontagemModelAndView("/cadastroproduto", new Produto(), msgSucesso, null);
+		} catch (Exception e) {
+			List<String> msg = new ArrayList<String>();
+			msg.add("Problema ao salvar este registro");
+			return MontagemModelAndView("/cadastroproduto", produto, null, msg);
+		}
 	}
 	
+	/*MÉTODO DE EDITAR*/
+	@GetMapping(value = "/editarproduto/{idproduto}")
+	public ModelAndView editar(@PathVariable("idproduto") Long idproduto) {
+		
+		Optional<Produto> produtoBuscado;
+		try {
+			produtoBuscado = produtoRepository.findById(idproduto);
+			return MontagemModelAndView("/cadastroproduto", produtoBuscado.get(), null, null);
+		} catch (Exception e) {
+			List<String> erro = new ArrayList<String>();
+			erro.add("Erro ao editar esse registro");
+			return MontagemModelAndView("/cadastroproduto", new Produto(), null,erro);
+		}
+	}
 	
-	
-	
+	/*MÉTODO DE EXCLUSÃO*/
+	@GetMapping(value = "/excluirproduto/{idproduto}")
+	public ModelAndView excluir(@PathVariable("idproduto") Long idproduto) {
+		try {
+			produtoRepository.deleteById(idproduto);
+		} catch (Exception e) {
+			List<String> msgErros = new ArrayList<String>();
+			msgErros.add("Problema ao excluir esse registro!");
+			return MontagemModelAndView("/cadastroproduto", new Produto(), null , msgErros);
+		}
+		List<String> msgSucesso = new ArrayList<String>();
+		msgSucesso.add("Produto excluido com sucesso!");
+		return MontagemModelAndView("/cadastroproduto", new Produto(), msgSucesso, null);
+	}
+
+	/*###############  REFATORAÇÃO ###################
+	 * O trecho de código abaixo se repetia em todos métodos*/
+	private ModelAndView MontagemModelAndView(String view, Produto produto,
+			List<String> msgSucesso, List<String> msgErros) {
+		//Defindo a url de retorno
+		ModelAndView modelAndView = new ModelAndView(view);
+		//Defindo o objeto manipulado pelo form
+		modelAndView.addObject("produtoobj", produto);
+		//Carregando a lista para o datatable
+		Iterable<Produto> produtos = produtoRepository.findAll();
+		modelAndView.addObject("produtos", produtos);
+		//carregando mensagens
+		if(msgSucesso != null)
+			modelAndView.addObject("msgSucesso", msgSucesso);
+		if(msgErros != null)
+			modelAndView.addObject("msg", msgErros);
+		return modelAndView;
+	}
 	
 }

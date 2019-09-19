@@ -102,8 +102,8 @@
 							<tr th:each="produto : ${produtos}">
 								<td th:text="${produto.id}"></td>
 								<td th:text="${produto.descricao}"></td>
-								<td>Editar</td>
-								<td>Excluir</td>
+								<td><a th:href="@{/editarproduto/{idproduto}(idproduto=${produto.id})}">Editar</a></td>
+								<td><a th:href="@{/excluirproduto/{idproduto}(idproduto=${produto.id})}">Excluir</a></td>
 							</tr>
 						</tbody>
 					</table>
