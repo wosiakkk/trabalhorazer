@@ -6,8 +6,11 @@
 	<meta charset="UTF-8">
 	<!-- Defindo as cor da fonte das mensagens de erros das validações do front -->
 	<style type="text/css">
-		.diverro, span{
+		.diverro, .erroBack{
 			color : red;
+		}
+		.sucessoBack{
+			color : green;
 		}
 	</style>
 	<!--Import Google Icon Font-->
@@ -44,22 +47,29 @@
 			<div class="container">
 				<div class="col s9">
 					<h2>Cadastro de Produtos</h2>
-					
+					<br/>
 					<!-- Div para exbir mensagens de validações do back-end -->
+					<!-- Varrendo a lista de erros com thymeleaf --> 
+					<div th:each="m : ${msg}">
+						<span class="erroBack" th:text="${m}"></span>
+					</div>
+					<!-- Div para exbir mensagens de sucesso do back-end -->
+					<div th:each="m : ${msgSucesso}">
+						<span class="sucessoBack" th:text="${m}"></span>
+					</div>
 					<br/>
 					
-					
 					<div class="row">
-						<form id="formProduto" th:action="@{/salvarproduto}" method="POST"  class="col s9">
+						<form id="formProduto" th:action="@{/salvarproduto}" method="POST" th:object="${produtoobj}" class="col s9">
 							<div class="row">
 								<div class="input-field col s9">
 									<label for="id">ID:</label>
-									<input type="text" name="id" id="id"  readonly="readonly">
+									<input type="text" name="id" id="id" th:field="*{id}" readonly="readonly">
 								</div>
 								<br/>
 								<div class="input-field col s9">
 									<label for="descricao" class="active">Descrição:</label>
-									<input type="text" name="descricao" id="descricao" class="validate">
+									<input type="text" name="descricao" id="descricao" th:field="*{descricao}" class="validate">
 									
 								</div>
 								
@@ -74,7 +84,6 @@
 							</div>
 						</form>
 					</div>
-					
 					
 				</div>
 			</div>

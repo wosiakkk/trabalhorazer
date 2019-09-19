@@ -87,6 +87,10 @@ public class ClienteController {
 		modelAndView.addObject("clientes", clientes);
 		/*Evitando erro de objeto nulo(necessário após realizar o método de edição)*/
 		modelAndView.addObject("clienteobj", new Cliente());
+		/*Mensagemd e sucesso*/
+		List<String> msgSucesso = new ArrayList<String>();
+		msgSucesso.add("Cliente salvo com sucesso!");
+		modelAndView.addObject("msgSucesso", msgSucesso);
 		return modelAndView;
 	}
 	
@@ -120,6 +124,9 @@ public class ClienteController {
 		/*Carregando a lista de usuários após editar*/
 		Iterable<Cliente> clientes = clienteRepository.findAll();
 		modelAndView.addObject("clientes", clientes);
+		List<String> msgSucesso = new ArrayList<String>();
+		msgSucesso.add("Cliente deletado com sucesso!");
+		modelAndView.addObject("msgSucesso", msgSucesso);
 		/*retornando*/
 		return modelAndView;
 	}

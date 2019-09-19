@@ -6,8 +6,11 @@
 	<meta charset="UTF-8">
 	<!-- Defindo as cor da fonte das mensagens de erros das validações do front -->
 	<style type="text/css">
-		.diverro, span{
+		.diverro, .erroBack{
 			color : red;
+		}
+		.sucessoBack{
+			color : green;
 		}
 	</style>
 	<!--Import Google Icon Font-->
@@ -35,6 +38,7 @@
 			<div class="collection">
 				<a th:href="@{/home}" class="collection-item">Início</a>
 				<a th:href="@{/teste}" class="collection-item active" sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
+				<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">Cadastro de Produtos</a>
       		</div>
 		</div>
 		
@@ -48,8 +52,13 @@
 					<br/>
 					<!-- Varrendo a lista de erros com thymeleaf --> 
 					<div th:each = "m : ${msg}">
-						<span th:text = "${m}"></span>
+						<span class="erroBack" th:text = "${m}"></span>
 					</div>
+					<!-- Div para exbir mensagens de sucesso do back-end -->
+					<div th:each="m : ${msgSucesso}">
+						<span class="sucessoBack" th:text="${m}"></span>
+					</div>
+					<!-- Div para exibir as validações do front com jquery --> 
 					<div class="diverro"></div>
 					<br/>
 					

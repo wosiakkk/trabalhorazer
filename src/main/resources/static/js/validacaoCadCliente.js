@@ -4,7 +4,7 @@ $("#formCliente").validate({
         rules: {
             cpf: {
             	required: true,
-            	minlength: 15
+            	minlength: 14
             },
             nome: {
             	required: true,
