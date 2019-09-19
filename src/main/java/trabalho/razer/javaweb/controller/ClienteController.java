@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import trabalho.razer.javaweb.model.Cliente;
-import trabalho.razer.javaweb.model.Produto;
 import trabalho.razer.javaweb.repository.ClienteRepository;
 
 @Controller
