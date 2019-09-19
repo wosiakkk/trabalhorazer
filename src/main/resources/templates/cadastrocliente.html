@@ -31,17 +31,13 @@
 </head>
 <body>
 	<!-- Div que recebe a Barra de navegação por js -->
-	<div id="navbar"></div>
+	<nav th:insert="fragments/navbar.html :: nav"></nav>
 	
 	<!-- Layout da página aqui -->
 	<div class="row">
-		<!-- Painel de navegação à esquerda -->
+		<!-- Painel de navegação à esquerda incluído com Thymeleaf -->
 		<div class="col s3">
-			<div class="collection">
-				<a th:href="@{/home}" class="collection-item">Início</a>
-				<a th:href="@{/teste}" class="collection-item active" sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
-				<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">Cadastro de Produtos</a>
-      		</div>
+			<div class="collection" th:insert="fragments/menu.html :: div"></div>
 		</div>
 		
 		<!-- Conteúdo da página principal -->
@@ -139,11 +135,15 @@
 	</div>
 	<!-- Importando o js para paginação da table de cliente -->
 	<script src="/js/paginacaoCliente.js"></script>
-	<!-- Importando o js para carregar a navbar -->
-	<script src="/js/navbar.js"></script>
 	<!-- Importando o js para validar o form-->
 	<script src="/js/validacaoCadCliente.js"></script>
 	<!-- Impotando o js para criar mascaras no form -->
 	<script src="/js/mascaraCadCliente.js"></script>
+	<!-- Script para controlar o active do menu lateral -->
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$("#menuCliente").addClass('active').siblings().removeClass('active');
+		});
+	</script>
 </body>
 </html>

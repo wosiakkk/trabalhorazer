@@ -1,0 +1,7 @@
+<meta charset="UTF-8">
+<div>
+	<a th:href="@{/home}" class="collection-item " id="menuInicio">Início</a>
+	<a th:href="@{/cadastrocliente}" class="collection-item" sec:authorize="hasRole('ROLE_ADMIN')" id="menuCliente">Cadastro de Clientes</a>
+	<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuProduto">Cadastro de Produtos</a>
+</div>
+

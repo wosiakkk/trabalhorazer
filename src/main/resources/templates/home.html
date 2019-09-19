@@ -16,18 +16,14 @@
 <title>Home</title>
 </head>
 <body>
-	
-    <div id="navbar"></div>
+	<!-- Incluindo a nav bar com Thymeleaf -->
+    <nav th:insert="fragments/navbar.html :: nav"></nav>
   
 	<!-- Layout da página aqui -->
 	<div class="row">
-		<!-- Painel de navegação à esquerda -->
+		<!-- Painel de navegação à esquerda incluído com Thymeleaf -->
 		<div class="col s3">
-			<div class="collection">
-				<a href="#!" class="collection-item active">Início</a>
-				<a th:href="@{/cadastrocliente}" class="collection-item " sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
-				<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">Cadastro de Produtos</a>
-      		</div>
+			<div class="collection" th:insert="fragments/menu.html :: div"></div>
 		</div>
 		<!-- Conteúdo da página principal -->
 		<div class="col s9" id="conteudo">
@@ -46,12 +42,10 @@
 			</div>
 		</div>
 	</div>
-	
-	<script type = "text/javascript">
- 		$(document).ready(function() {
- 		    $('#navbar').load('navbar');
- 		});
+	<script type="text/javascript">
+		$( document ).ready(function() {
+			$("#menuInicio").addClass('active').siblings().removeClass('active');
+		});
 	</script>
-	
 </body>
 </html>

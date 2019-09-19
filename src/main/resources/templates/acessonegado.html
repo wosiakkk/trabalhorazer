@@ -17,7 +17,8 @@
 <title>Acesso negado</title>
 </head>
 <body>
-	<div id="navbar"></div>
+	<!-- Incluindo a nav bar com thymeleaf -->
+    <nav th:insert="fragments/navbar.html :: nav"></nav>
 
 	<div class="container">
 		<!-- Card do materialize com uma breve descrição -->
@@ -27,10 +28,6 @@
 				Clique <a th:href="@{/home}">aqui</a> para voltar</h2>
 		</div>
 	</div>
-	<script type = "text/javascript">
- 		$(document).ready(function() {
- 		    $('#navbar').load('navbar');
- 		});
-	</script>
+
 </body>
 </html>
