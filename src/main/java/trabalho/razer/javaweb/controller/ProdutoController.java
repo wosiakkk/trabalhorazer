@@ -51,6 +51,7 @@ public class ProdutoController {
 		} catch (Exception e) {
 			List<String> msg = new ArrayList<String>();
 			msg.add("Problema ao salvar este registro");
+			System.out.println("Erro: "+ e.getCause());
 			return MontagemModelAndView("/cadastroproduto", produto, null, msg);
 		}
 	}
@@ -66,6 +67,7 @@ public class ProdutoController {
 		} catch (Exception e) {
 			List<String> erro = new ArrayList<String>();
 			erro.add("Erro ao editar esse registro");
+			System.out.println("Erro: "+ e.getCause());
 			return MontagemModelAndView("/cadastroproduto", new Produto(), null,erro);
 		}
 	}
@@ -75,20 +77,23 @@ public class ProdutoController {
 	public ModelAndView excluir(@PathVariable("idproduto") Long idproduto) {
 		try {
 			produtoRepository.deleteById(idproduto);
+			List<String> msgSucesso = new ArrayList<String>();
+			msgSucesso.add("Produto excluido com sucesso!");
+			return MontagemModelAndView("/cadastroproduto", new Produto(), msgSucesso, null);
 		} catch (Exception e) {
 			List<String> msgErros = new ArrayList<String>();
 			msgErros.add("Problema ao excluir esse registro!");
+			System.out.println("Erro: "+ e.getCause());
 			return MontagemModelAndView("/cadastroproduto", new Produto(), null , msgErros);
 		}
-		List<String> msgSucesso = new ArrayList<String>();
-		msgSucesso.add("Produto excluido com sucesso!");
-		return MontagemModelAndView("/cadastroproduto", new Produto(), msgSucesso, null);
+		
 	}
 
 	/*###############  REFATORAÇÃO ###################
 	 * O trecho de código abaixo se repetia em todos métodos*/
 	private ModelAndView MontagemModelAndView(String view, Produto produto,
 			List<String> msgSucesso, List<String> msgErros) {
+		
 		//Defindo a url de retorno
 		ModelAndView modelAndView = new ModelAndView(view);
 		//Defindo o objeto manipulado pelo form

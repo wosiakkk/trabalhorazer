@@ -38,3 +38,14 @@ $("#formCliente").validate({
         errorElement : 'div',
         errorLabelContainer: '.diverro'
 });
+/*função criada para retirar a mensagem de sucesso que fica mostrando após 
+ * haver erros de validação, misturando as mensagens, com isso é verificado se há mensagem de sucesso,
+ * quando haver mensagens de erros geradas pelo validade,
+ * se houver a div de sucesso é escondida*/
+function verificarMensagem() {
+	
+	if(!($(".sucessoBack").is(':empty'))){
+		$("#divSucesso").hide();
+	}
+};
+

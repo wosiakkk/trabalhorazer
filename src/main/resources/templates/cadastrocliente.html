@@ -57,7 +57,7 @@
 						<span class="erroBack" th:text = "${m}"></span>
 					</div>
 					<!-- Div para exbir mensagens de sucesso do back-end -->
-					<div th:each="m : ${msgSucesso}">
+					<div th:each="m : ${msgSucesso}" id="divSucesso">
 						<span class="sucessoBack" th:text="${m}"></span>
 					</div>
 					<!-- Div para exibir as validações do front com jquery --> 
@@ -74,18 +74,21 @@
 								<br/>
 								<div class="input-field col s9">
 									<label for="cpf" class="active">CPF:</label>
-									<input type="text" name="cpf" id="cpf" th:field="*{cpf}" class="cpf validate" placeholder="Insira o cpf">
+									<input type="text" name="cpf" id="cpf" th:field="*{cpf}" 
+									class="cpf validate" placeholder="Insira o cpf" onblur="verificarMensagem();">
 									
 								</div>
 								
 								<div class="input-field col s9">
 									<label for="nome" class="active">Nome:</label>
-									<input type="text" name="nome" id="nome" th:field="*{nome}" class="validate" placeholder="Insira o nome">
+									<input type="text" name="nome" id="nome" th:field="*{nome}" 
+									class="validate" placeholder="Insira o nome" onblur="verificarMensagem();">
 									
 								</div>
 								<div class="input-field col s9">
 									<label for="sobrenome" class="active">Sobrenome:</label>
-									<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" class="validate" placeholder="Insira o sobrenome">
+									<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" 
+									class="validate" placeholder="Insira o sobrenome" onblur="verificarMensagem();">
 									
 								</div>
 								<div class="input-field col s9">
