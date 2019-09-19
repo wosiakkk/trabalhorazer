@@ -26,6 +26,7 @@
 			<div class="collection">
 				<a href="#!" class="collection-item active">Início</a>
 				<a th:href="@{/cadastrocliente}" class="collection-item " sec:authorize="hasRole('ROLE_ADMIN')">Cadastro de Clientes</a>
+				<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">Cadastro de Produtos</a>
       		</div>
 		</div>
 		<!-- Conteúdo da página principal -->
