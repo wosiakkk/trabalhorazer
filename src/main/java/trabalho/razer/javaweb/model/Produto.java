@@ -1,12 +1,15 @@
 package trabalho.razer.javaweb.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -26,6 +29,11 @@ public class Produto implements Serializable{
 	@NotNull(message = "A descrição não pode ser nula!")
 	@Column(nullable = false)
 	private String descricao;
+	
+	
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
+	private List<ItemDoPedido> produto;
+	
 	/*###########################*/
 
 	/*######## Getters e Setters ########*/

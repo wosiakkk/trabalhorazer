@@ -2,7 +2,9 @@ package trabalho.razer.javaweb.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,9 +29,22 @@ public class Pedido implements Serializable{
 	private Date data;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_cliente",referencedColumnName = "id", table = "cliente")
-	@Column(nullable = false)
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<ItemDoPedido> itens;
+	
+	public Pedido() {
+	}
+	
+	public Pedido( Date data, Cliente cliente, List<ItemDoPedido> itens) {
+		super();
+	
+		this.data = data;
+		this.cliente = cliente;
+		this.itens = itens;
+	}
 
 	public Long getId() {
 		return id;
@@ -53,7 +69,12 @@ public class Pedido implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-
+public void setItens(List<ItemDoPedido> itens) {
+	this.itens = itens;
+}
+public List<ItemDoPedido> getItens() {
+	return itens;
+}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
