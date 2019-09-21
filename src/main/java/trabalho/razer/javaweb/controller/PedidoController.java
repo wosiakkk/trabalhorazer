@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import trabalho.razer.javaweb.model.Cliente;
@@ -60,6 +61,48 @@ public class PedidoController {
 		System.out.println(pedido);
 		
 		return null;
+	}
+	
+	/*Buscar cliente por CPF para cadastro de pedidos*/
+	@PostMapping(value = "/buscacpf")
+	private ModelAndView bucarCpf(String cpf) {
+		Cliente busca;
+		try {
+			busca = clienteRepository.buscaPorCpf(cpf);
+			if(busca!=null) {
+				return MontagemModelAndView("/cadastropedido", busca, null, null);
+			}else {
+				List<String> msgErro = new ArrayList<String>();
+				msgErro.add("CPF Não cadastrado");
+				return MontagemModelAndView("/buscarcliente", null, null, msgErro);
+			}
+		} catch (Exception e) {
+			List<String> msgErro = new ArrayList<String>();
+			msgErro.add("Problema ao burcar o registro!");
+			System.out.println("Erro: "+ e.getCause());
+			return MontagemModelAndView("/buscarcliente", new Cliente(), null, msgErro);
+		}
+	}
+	
+	
+	/*###############  REFATORAÇÃO ###################
+	 * O trecho de código abaixo se repetia em todos métodos*/
+	private ModelAndView MontagemModelAndView(String view, Cliente cliente,
+			List<String> msgSucesso, List<String> msgErros) {
+		
+		//Defindo a url de retorno
+		ModelAndView modelAndView = new ModelAndView(view);
+		//Defindo o objeto manipulado pelo form
+		modelAndView.addObject("clienteobj", cliente);
+		//Carregando a lista para o datatable
+		Iterable<Produto> produtos = produtoRepository.findAll();
+		modelAndView.addObject("produtos", produtos);
+		//carregando mensagens
+		if(msgSucesso != null)
+			modelAndView.addObject("msgSucesso", msgSucesso);
+		if(msgErros != null)
+			modelAndView.addObject("msg", msgErros);
+		return modelAndView;
 	}
 	
 }

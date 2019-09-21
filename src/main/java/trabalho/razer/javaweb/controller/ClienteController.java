@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -96,21 +95,6 @@ public class ClienteController {
 		
 	}
 	
-	/*Buscar cliente por CPF para cadastro de pedidos*/
-	@PostMapping(value = "/buscacpf")
-	private ModelAndView bucarCpf(String cpf) {
-		Cliente busca = clienteRepository.buscaPorCpf(cpf);
-		if(busca!=null) {
-			List<String> msgSucesso = new ArrayList<String>();
-			msgSucesso.add("Cliente encontrado com sucesso!");
-			return MontagemModelAndView("/buscarcliente", null, msgSucesso, null);
-		}else {
-			List<String> msgErro = new ArrayList<String>();
-			msgErro.add("CPF Não cadastrado");
-			return MontagemModelAndView("/buscarcliente", null, null, msgErro);
-			
-		}
-	}
 	
 	/*###############  REFATORAÇÃO ###################
 	 * O trecho de código abaixo se repetia em todos métodos*/
