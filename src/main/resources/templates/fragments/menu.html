@@ -3,6 +3,6 @@
 	<a th:href="@{/home}" class="collection-item " id="menuInicio">Início</a>
 	<a th:href="@{/cadastrocliente}" class="collection-item" sec:authorize="hasRole('ROLE_ADMIN')" id="menuCliente">Cadastro de Clientes</a>
 	<a th:href="@{/cadastroproduto}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuProduto">Cadastro de Produtos</a>
-	<a th:href="@{/cadastrarpedido}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" >Cadastro de Pedido</a>
+	<a th:href="@{/buscarcliente}" class="collection-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuPedido" >Cadastro de Pedido</a>
 </div>
 

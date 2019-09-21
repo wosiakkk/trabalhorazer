@@ -49,3 +49,23 @@ function verificarMensagem() {
 	}
 };
 
+/*Validação da busca de cpf para cadastro de pedido*/
+$("#formBusca").validate({
+	// definindo as regras
+    rules: {
+        cpf: {
+        	required: true,
+        	minlength: 14
+        }
+    },
+    // defindo as mensagens
+    messages: {
+    	cpf:{
+            required: "O campo CPF é obrigatório",
+            minlength: "O campo CPF tem no mínimo 15 caracteres"	
+        },
+    },
+    // definndo o elemento para receber o conatiner de erros
+    errorElement : 'div',
+    errorLabelContainer: '.diverro'
+});

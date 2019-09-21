@@ -30,11 +30,8 @@ public class Produto implements Serializable{
 	@Column(nullable = false)
 	private String descricao;
 	
-	
 	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL)
 	private List<ItemDoPedido> produto;
-	
-	/*###########################*/
 
 	/*######## Getters e Setters ########*/
 	public Long getId() {
@@ -52,7 +49,6 @@ public class Produto implements Serializable{
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	/*###########################*/
 	
 	/*######## Equals e Hashcode por Id #####*/
 	@Override

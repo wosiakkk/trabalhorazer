@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @Table
 public class Pedido implements Serializable{
 
+	/*######### Atributos ###############*/
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -35,8 +36,8 @@ public class Pedido implements Serializable{
 	@OneToMany(mappedBy = "pedido",cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ItemDoPedido> itens;
 	
-	public Pedido() {
-	}
+	/*######### Construtores ###############*/
+	public Pedido() {}
 	
 	public Pedido( Date data, Cliente cliente, List<ItemDoPedido> itens) {
 		super();
@@ -46,6 +47,7 @@ public class Pedido implements Serializable{
 		this.itens = itens;
 	}
 
+	/*######### Getters e Setters ###############*/
 	public Long getId() {
 		return id;
 	}
@@ -69,12 +71,14 @@ public class Pedido implements Serializable{
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-public void setItens(List<ItemDoPedido> itens) {
-	this.itens = itens;
-}
-public List<ItemDoPedido> getItens() {
-	return itens;
-}
+	public void setItens(List<ItemDoPedido> itens) {
+		this.itens = itens;
+	}
+	public List<ItemDoPedido> getItens() {
+		return itens;
+	}
+	
+	/*######### Override do euqls e hashcode por id ###############*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;

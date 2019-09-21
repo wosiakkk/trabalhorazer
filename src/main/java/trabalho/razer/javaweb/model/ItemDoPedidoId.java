@@ -5,11 +5,12 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-/*Classe de composite key para a tabela auxiliar item_do_pedido*/
+/*Classe de composite key para a tabela auxiliar item_do_pedido.*/
 
 @Embeddable
 public class ItemDoPedidoId implements Serializable{
 	
+	/*######### Atributos ###############*/
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name = "id_pedido")
@@ -17,6 +18,7 @@ public class ItemDoPedidoId implements Serializable{
 	@Column(name = "id_produto")
 	private Long idproduto;
 	
+	/*######### Getters e Setters ###############*/
 	public Long getIdpedido() {
 		return idpedido;
 	}
@@ -30,15 +32,17 @@ public class ItemDoPedidoId implements Serializable{
 		this.idproduto = idproduto;
 	}
 	
-	public ItemDoPedidoId() {
-		// TODO Auto-generated constructor stub
-	}
+	/*######### Construtores ###############*/
+	public ItemDoPedidoId() {}
 	
 	public ItemDoPedidoId(Long idpedido, Long idproduto) {
 		super();
 		this.idpedido = idpedido;
 		this.idproduto = idproduto;
 	}
+	/*######################################*/
+	
+	/*######### Override dos equals e hashcode pelos ids compostos ###############*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +72,5 @@ public class ItemDoPedidoId implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }

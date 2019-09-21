@@ -33,6 +33,7 @@ public class PedidoController {
 	@GetMapping(value = "/cadastrarpedido")
 	private ModelAndView salvar() {
 		
+		/*Código para teste de save da rotina de pedido*/
 	
 		Optional<Cliente> teste = clienteRepository.findById(2L);
 		

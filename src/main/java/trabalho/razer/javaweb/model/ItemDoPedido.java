@@ -9,43 +9,44 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+/*Classe para maniplar objetos da tabela auxilar da relação manytomany entre Pedido e Produtos.*/
 
 @Entity
 @Table(name = "item_do_pedido")
 public class ItemDoPedido implements Serializable{
 
+	/*######### Atributos ###############*/
 	private static final long serialVersionUID = 1L;
+	//embutindo a composite key
 	@EmbeddedId
 	private ItemDoPedidoId id;
 	
 	@ManyToOne
-	@MapsId("idpedido")
+	@MapsId("idpedido") //key da classe ItemDoPedidoId
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
 	@ManyToOne
-	@MapsId("idproduto")
+	@MapsId("idproduto")//key da classe ItemDoPedidoId
 	@JoinColumn(name = "id_produto")
 	private Produto produto;
 	
 	@Column(name = "quantidade")
 	private Long quantidade;
-
 	
+	/*######### Construtores ############*/
+	public ItemDoPedido() {}
 	
-
 	public ItemDoPedido(Pedido pedido, Produto produto, Long quantidade) {
 		super();
 		this.pedido = pedido;
 		this.produto = produto;
 		this.quantidade = quantidade;
+		/* No construtor desta classe temos que instânciar a sua composite key passando os ids*/
 		this.id = new ItemDoPedidoId(pedido.getId(), produto.getId());
 	}
-
-	public ItemDoPedido() {
-		// TODO Auto-generated constructor stub
-	}
 	
+	/*######### Getters e Setters ############*/
 	public ItemDoPedidoId getId() {
 		return id;
 	}
@@ -78,6 +79,7 @@ public class ItemDoPedido implements Serializable{
 		this.quantidade = quantidade;
 	}
 
+	/*######### Override do equals e hashcode pelo ID ############*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,6 +104,5 @@ public class ItemDoPedido implements Serializable{
 			return false;
 		return true;
 	}
-	
 	
 }
