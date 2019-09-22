@@ -19,7 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests() //Permitir restringir acessos
+		http.csrf().disable().authorizeRequests() //Permitir restringir acessos
 		.antMatchers("/", "/index").permitAll() //Dando acesso total a page inicial
 		.antMatchers("/cadastrocliente").hasAnyRole("ADMIN") //Restringindo acesso a uma página de acrodo com alguma role
 		.anyRequest().authenticated()

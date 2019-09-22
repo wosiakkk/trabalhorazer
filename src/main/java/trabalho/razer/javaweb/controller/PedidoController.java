@@ -7,11 +7,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import trabalho.razer.javaweb.dto.ListaPedidoDTO;
+import trabalho.razer.javaweb.dto.ListaPedidoWrapper;
 import trabalho.razer.javaweb.model.Cliente;
 import trabalho.razer.javaweb.model.ItemDoPedido;
 import trabalho.razer.javaweb.model.Pedido;
@@ -82,6 +89,17 @@ public class PedidoController {
 			System.out.println("Erro: "+ e.getCause());
 			return MontagemModelAndView("/buscarcliente", new Cliente(), null, msgErro);
 		}
+	}
+	
+	@RequestMapping(value = "/testelista", method = RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	private ModelAndView listaitens(@RequestBody ListaPedidoWrapper wrapper) {
+		
+		
+		
+		System.out.println(wrapper);
+		
+		return null;
 	}
 	
 	
