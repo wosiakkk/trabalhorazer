@@ -95,9 +95,31 @@ public class PedidoController {
 	@ResponseBody
 	private ModelAndView listaitens(@RequestBody ListaPedidoWrapper wrapper) {
 		
+		Cliente cliente = null;
+		Produto produto =null;
+		List<ItemDoPedido> itens = new ArrayList<>();
+		Pedido pedido = new Pedido();
+		for (ListaPedidoDTO listaDto : wrapper.getListaitens()) {
+			if(cliente ==null) {
+				cliente = clienteRepository.buscaPorCpf(listaDto.getClientecpf());
+				Calendar c = Calendar.getInstance();
+				Date data = c.getTime();
+				
+				pedido.setCliente(cliente);
+				pedido.setData(data);
+				pedido = pedidoRepository.save(pedido);
+			}
+			produto = produtoRepository.findById(Long.parseLong(listaDto.getIdproduto())).get();
+			Long qtd = Long.parseLong(listaDto.getQuantidade());
+			ItemDoPedido item = new ItemDoPedido(pedido, produto, qtd);
+			itens.add(item);
+		}
 		
+		pedido.setItens(itens);
+
+		pedidoRepository.save(pedido);	
 		
-		System.out.println(wrapper);
+		System.out.println(pedido);
 		
 		return null;
 	}
