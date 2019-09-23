@@ -29,6 +29,7 @@ public class Application implements WebMvcConfigurer{
 		registry.addViewController("/cadastroproduto").setViewName("cadastroproduto");
 		registry.addViewController("/buscarcliente").setViewName("buscarcliente");
 		registry.addViewController("/cadastropedido").setViewName("cadastropedido");
+		registry.addViewController("/sucessopedido").setViewName("sucessopedido");
 		
 	}
 

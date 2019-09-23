@@ -59,7 +59,6 @@
 					<div class="diverro"></div>
 					<br/>
 					<div th:object="${clienteobj}">
-						
 						<table class="striped">
 							<thead>
 								<tr>
@@ -69,6 +68,7 @@
 							</thead>
 							<tbody>
 								<tr>
+								<!-- Campo utilizado para passar junto com os dados dos produtos na req ajax -->
 									<td th:text="${clienteobj.cpf}" id="cpfcliente"></td>
 									<td th:text="${clienteobj.nome}"></td>
 								</tr>
@@ -92,7 +92,7 @@
 								<td th:text="${produto.id}" class="idProduto"></td>
 								<td th:text="${produto.descricao}" class="descProduto"></td>
 								<td><input type="number" class="quantidade"  style="width: 40px" min="1" step="1"></td>
-								<td><button class="addbotao">Add</button> </td>
+								<td><button class="addbotao btn waves-effect waves-light">Add</button> </td>
 							</tr>
 						</tbody>
 					</table>
@@ -102,135 +102,22 @@
          			 </div>
          			 <br/>
          			 <br/>
-         			 <h4>Lista de Produtos adicionados</h4>
-         			
-	         			 <form action="#" id="formListaPedido">
-	         			 	 <div id="itens"></div>
-	         			 </form>
-	         		
+         			 <div class="col s9">
+	         			 <h4>Lista de Produtos adicionados</h4>
+		         		<form action="#" id="formListaPedido">
+		         			 <div id="itens"></div>
+		         		</form>
+		         	</div>
+		         	<div class="col s9">
+		         		<button id="enviar" class="btn waves-effect waves-light">Enviar</button>
+		         	</div>
 				</div>
 			</div>
-			<button id="enviar">Enviar</button>
+			
 		</div>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			
-			var max_campos = 5; //máximo de campos para add
-			var wrapper = $("#itens");//componente dos itens
-			var add_botao = $(".addbotao");//o botão de add
-			
-			
-			
-			
-			
-			var count =1; //contador para as adições
-			$(".addbotao").click(function(e) {
-				
-				var $row = $(this).closest("tr"); //encontrando a linha
-				
-				var quantidade = $row.find(".quantidade").val(); //buscando na linha o valor desejado
-				var nomeProduto = $row.find(".descProduto").text();
-				var idproduto = $row.find(".idProduto").text();
-				var clientecpf = $("#cpfcliente").text();
-				if(quantidade!=0){
-					if(count < max_campos){
-						count++;
-						$(wrapper).append(
-							'<div class="form-group">'+
-								'<input type="text" value="'+idproduto+'" name="idproduto"  class="conteudo" hidden>'+
-								'<input type="text" value="'+nomeProduto+'" style="width : 50px">'+" "+
-								'<input type="text" value="'+quantidade+'" name="quantidade" class="conteudo" style="width : 30px">'+
-								'<input type="text" value="'+clientecpf+'" name="clientecpf"  class="conteudo" hidden>'+
-								'<a href="#" class="remove_field">Remover</a>'+
-							'</div>'
-						);
-					}
-				}else{
-					alert("A quantidade não pode ser 0!");
-				}
-			});
-			$(wrapper).on("click",".remove_field", function(e) {
-				e.preventDefault();
-				$(this).parent('div').remove();
-				count--;
-			});
-		});
-	
-	
-		$("#enviar").click(function(e) {
-			
-			e.preventDefault();
-			var jsonObj = [];
-			$(".form-group").each(function(index, elem) {
-				console.log(index);
-				console.log(elem);
-				item = {};
-				var idproduto;
-				var quantidade;
-				var clientecpf;
-				var count = 0;
-				$(elem).children(".conteudo").each(function (index, elem) {
-					
-					var nome = $(elem).attr('name')
-					
-					if(nome == "idproduto"){
-						idproduto = $(elem).attr('value');
-						count++;
-					}
-					if (nome == "quantidade"){
-						quantidade = $(elem).attr('value');
-						count++;
-						
-					}
-					if (nome == "clientecpf"){
-						clientecpf = $(elem).attr('value');
-						count++;
-						
-					}
-					console.log(count);
-					if(count ==3){
-						item["idproduto"] = idproduto;
-						item["quantidade"] = quantidade;
-						item["clientecpf"] = clientecpf;
-						jsonObj.push(item);
-						count=0;
-					}
-				})
-				
-				
-					
-				
-				
-				
-				
-			})
-			
-			console.log(jsonObj);
-			jsonObj = JSON.stringify({'listaitens' : jsonObj});
-			$.ajax({
-				type: 'POST',
-				url : '/testelista',
-				data : jsonObj,
-				dataType : 'json',
-				contentType: 'application/json; charset=utf-8'
-			})
-			
-			
-		})
-	
-	
-	
-	
-	</script>
-	
-	
-	
-	
-	
-	
-	
-	
+	<!-- Script que controla toda a tela e envia dados a controller -->
+	<script src="/js/pedidoController.js"></script>
 	<!-- Importando o js para paginação da table de produto -->
 	<script src="/js/paginacaoProduto.js"></script>
 	<!-- Importando o js para validar o form-->
