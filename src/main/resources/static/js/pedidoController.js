@@ -13,21 +13,26 @@ $(document).ready(function() {
 		var idproduto = $row.find(".idProduto").text();
 		var clientecpf = $("#cpfcliente").text();/*este campo é o cpf que já esta carregado na view atual*/
 		if(quantidade!=0){ //verificando a quantidade de campos add
-			
-			if(count < max_campos){
-				count++;
-				//realiznado a 
-				$(wrapper).append(
-					'<div class="form-group">'+
-					'<input type="text" value="'+idproduto+'" name="idproduto"  class="conteudo" hidden>'+
-					'<input type="text" value="'+nomeProduto+'" style="width : 50px">'+" "+
-					'<input type="text" value="'+quantidade+'" name="quantidade" class="conteudo" style="width : 30px">'+
-					'<input type="text" value="'+clientecpf+'" name="clientecpf"  class="conteudo" hidden>'+
-					'<a href="#" class="remove_field">Remover</a>'+
-					'</div>'
-				);
+			//verificando se o produto já foi add na lista de produtos selecionados
+			var validarProduto = $(".form-group").children('input[value='+nomeProduto+']');
+			console.log(validarProduto);
+			if(validarProduto.length > 0){
+				alert("Esse produto já foi adicionado");
+			}else{
+				if(count < max_campos){
+					count++;
+					//realiznado a 
+					$(wrapper).append(
+						'<div class="form-group">'+
+						'<input type="text" value="'+idproduto+'" name="idproduto"  class="conteudo" hidden>'+
+						'<input type="text" value="'+nomeProduto+'" style="width : 50px">'+" "+
+						'<input type="text" value="'+quantidade+'" name="quantidade" class="conteudo" style="width : 30px">'+
+						'<input type="text" value="'+clientecpf+'" name="clientecpf"  class="conteudo" hidden>'+
+						'<a href="#" class="remove_field">Remover</a>'+
+						'</div>'
+					);
+				}
 			}
-				
 		}else{
 			alert("A quantidade não pode ser 0!");//caso seja 0, isso tbm é verificado no html
 		}
