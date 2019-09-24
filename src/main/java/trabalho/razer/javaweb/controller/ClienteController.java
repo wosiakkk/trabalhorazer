@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import trabalho.razer.javaweb.model.Cliente;
+import trabalho.razer.javaweb.model.Pedido;
 import trabalho.razer.javaweb.repository.ClienteRepository;
+import trabalho.razer.javaweb.repository.PedidoRepository;
 
 @Controller
 public class ClienteController {
@@ -25,6 +27,8 @@ public class ClienteController {
 	/*Injetando o repository*/
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private PedidoRepository pedidoRepository;
 	
 	/*Método para executar na primeira requisição na página de cadastro de cliente.
 	 * Com isso a lista de clientes atuais já é carregada*/
@@ -82,11 +86,22 @@ public class ClienteController {
 	public ModelAndView excluir(@PathVariable("idcliente") Long idcliente) {
 		
 		try {
-			clienteRepository.deleteById(idcliente);
-			List<String> msgSucesso = new ArrayList<String>();
-			msgSucesso.add("Cliente deletado com sucesso!");
-			return MontagemModelAndView("/cadastrocliente", new Cliente(), msgSucesso, null);
+			
+			int numeroDePedidos = pedidoRepository.numeroDePedido(idcliente);
+			if(numeroDePedidos == 0) {
+				clienteRepository.deleteById(idcliente);
+				List<String> msgSucesso = new ArrayList<String>();
+				msgSucesso.add("Cliente deletado com sucesso!");
+				return MontagemModelAndView("/cadastrocliente", new Cliente(), msgSucesso, null);
+			}else {
+				List<String> msgErro = new ArrayList<String>();
+				msgErro.add("Este cliente possui pedidos, não pode ser excluído!");
+				return MontagemModelAndView("/cadastrocliente", new Cliente(), null, msgErro);
+			}
+			
+			
 		} catch (Exception e) {
+			e.printStackTrace();
 			List<String> msgErro = new ArrayList<String>();
 			msgErro.add("Problema ao deletar o registro!");
 			System.out.println("Erro: "+ e.getCause());

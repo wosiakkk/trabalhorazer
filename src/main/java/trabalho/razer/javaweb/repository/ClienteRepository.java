@@ -9,4 +9,6 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long>{
 	
 	@Query(value = "select c from Cliente c where c.cpf = ?1")
 	Cliente buscaPorCpf(String cpf);
+	
+	
 }

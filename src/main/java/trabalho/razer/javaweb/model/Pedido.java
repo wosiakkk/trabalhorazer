@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "pedido")
 public class Pedido implements Serializable{
 
 	/*######### Atributos ###############*/
