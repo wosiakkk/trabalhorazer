@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import trabalho.razer.javaweb.model.Cliente;
-import trabalho.razer.javaweb.model.Pedido;
 import trabalho.razer.javaweb.repository.ClienteRepository;
 import trabalho.razer.javaweb.repository.PedidoRepository;
 
@@ -98,7 +97,6 @@ public class ClienteController {
 				msgErro.add("Este cliente possui pedidos, não pode ser excluído!");
 				return MontagemModelAndView("/cadastrocliente", new Cliente(), null, msgErro);
 			}
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
