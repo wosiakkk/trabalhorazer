@@ -44,7 +44,7 @@
 		<div class="col s9" id="conteudo">
 			<div class="container">
 				<div class="col s9">
-					<h2>Cadastro de Clientes</h2>
+					<h2>Busca de Pedidos</h2>
 					
 					<!-- Div para exbir mensagens de validações do back-end -->
 					<br/>
@@ -61,88 +61,37 @@
 					<br/>
 					
 					<div class="row">
-						<form id="formCliente" th:action="@{/salvar}" method="POST" th:object="${clienteobj}" class="col s9">
+						<form id="formBusca" th:action="@{/buscapedidos}" method="POST" class="col s9">
 							<div class="row">
 								<div class="input-field col s9">
-									<label for="id">ID:</label>
-									<input type="text" name="id" id="id" th:field="*{id}" readonly="readonly">
+									<label for="cpf" class="active">CPF:</label>
+									<input type="text" name="cpf" id="cpf" 
+									class="cpf validate" placeholder="Insira o cpf" onblur="verificarMensagem();">
 								</div>
 								<br/>
-								<div class="input-field col s9">
-									<label for="cpf" class="active">CPF:</label>
-									<input type="text" name="cpf" id="cpf" th:field="*{cpf}" 
-									class="cpf validate" placeholder="Insira o cpf" onblur="verificarMensagem();">
-									
-								</div>
 								
 								<div class="input-field col s9">
-									<label for="nome" class="active">Nome:</label>
-									<input type="text" name="nome" id="nome" th:field="*{nome}" 
-									class="validate" placeholder="Insira o nome" onblur="verificarMensagem();">
-									
-								</div>
-								<div class="input-field col s9">
-									<label for="sobrenome" class="active">Sobrenome:</label>
-									<input type="text" name="sobrenome" id="sobrenome" th:field="*{sobrenome}" 
-									class="validate" placeholder="Insira o sobrenome" onblur="verificarMensagem();">
-									
-								</div>
-								<div class="input-field col s9">
 									<button class="btn waves-effect waves-light" type="submit" name="action">
-										Salvar <i class="material-icons right">send</i>
-									</button>
-									<button class="btn waves-effect waves-light"
-										onclick="document.getElementById('formCliente').reset();">Novo
+										Buscar <i class="material-icons right">send</i>
 									</button>
 								</div>
 							</div>
 						</form>
 					</div>
-					
-					<!-- Tabela com os Clientes cadastrados -->
-					
-					<h3 class="center-align">Lista de Clientes</h3>
-					<table class="striped" id="tabelaClientes">
-					<thead>
-						<tr>
-							<th>ID:</th>
-							<th>Nome:</th>
-							<th>Sobrenome:</th>
-							<th>CPF:</th>
-							<th>Editar:</th>
-							<th>Excluir:</th>
-						</tr>
-						</thead>
-						<tbody>
-							<tr th:each = "cliente : ${clientes}"><!-- foreach do thymeleaf, recuperando alista do bd pessoas e jogando em varipaveis pessoa -->
-								<td th:text = ${cliente.id}></td>
-								<td th:text = ${cliente.nome}></td>
-								<td th:text = ${cliente.sobrenome}></td>
-								<td th:text = ${cliente.cpf}></td>
-								<!-- Passando um parâmetro com thymeleaf por link para o back -->
-								<td><a class="waves-effect waves-light btn" th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">Editar</a></td>
-								<td><a class="waves-effect waves-light btn" th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">Excluir</a></td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="col s9 center text-center">
-	    				<span class="left" id="total_reg"></span>
-            			<ul class="pagination pager" id="paginacao"></ul>
-         			 </div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!-- Importando o js para paginação da table de cliente -->
 	<script src="/js/paginacaoCliente.js"></script>
-	<!-- Importando o js para validar o form-->
-	<script src="/js/validacaoCadCliente.js"></script>
 	<!-- Impotando o js para criar mascaras no form -->
 	<script src="/js/mascaraCadCliente.js"></script>
+	<!-- Importando o js para validar o form-->
+	<script src="/js/validacaoCadCliente.js"></script>
 	<!-- Script para controlar o active do menu lateral -->
 	<script type="text/javascript">
 		$( document ).ready(function() {
-			$("#menuCliente").addClass('active').siblings().removeClass('active');
+			$("#menuExibirPedido").addClass('active').siblings().removeClass('active');
 		});
 	</script>
 </body>

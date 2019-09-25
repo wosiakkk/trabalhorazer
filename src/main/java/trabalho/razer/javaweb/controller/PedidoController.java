@@ -42,9 +42,51 @@ public class PedidoController {
 	@GetMapping(value = "/cadastropedido")
 	private ModelAndView controlePaginaCadastroPedido() {
 		List<String> msgErro = new ArrayList<String>();
-		msgErro.add("Vcê não pode acessar a página de cadastro sem antes selecionar um cliente!");
+		msgErro.add("Você não pode acessar a página de cadastro sem antes selecionar um cliente!");
 		return MontagemModelAndView("/buscarcliente", new Cliente(), null, msgErro);
 	}
+	
+	@PostMapping(value = "/buscapedidos")
+	private ModelAndView buscarPedidos(String cpf) {
+		
+		Cliente cliente;
+		try {
+			//buscando o cleinte informado
+			cliente = clienteRepository.buscaPorCpf(cpf);
+			if(cliente != null) {
+				//verificando se ele possui pedidos
+				int numeroDePedidos = pedidoRepository.numeroDePedido(cliente.getId());
+				if(numeroDePedidos > 0) {
+					//possui pedidos
+				}else {
+					List<String> msgErro = new ArrayList<String>();
+					msgErro.add("Este usuário não possui pedidos cadastrados.");
+					return MontagemModelAndView("/buscarpedidos", null, null, msgErro);
+				}
+			}else {
+				List<String> msgErro = new ArrayList<String>();
+				msgErro.add("CPF Não cadastrado");
+				return MontagemModelAndView("/buscarpedidos", null, null, msgErro);
+			}
+		} catch (Exception e) {
+			List<String> msgErro = new ArrayList<String>();
+			msgErro.add("Problema ao burcar o registro!");
+			System.out.println("Erro: "+ e.getCause());
+			return MontagemModelAndView("/buscarpedidos", new Cliente(), null, msgErro);
+		}
+		
+		
+		
+		//int numeroDePedidos = pedidoRepository.numeroDePedido(idcliente);
+	/*	if(numeroDePedidos == 0) {
+			clienteRepository.deleteById(idcliente);
+			List<String> msgSucesso = new ArrayList<String>();
+			msgSucesso.add("Cliente deletado com sucesso!");
+			return MontagemModelAndView("/cadastrocliente", new Cliente(), msgSucesso, null);
+		}*/
+		return null;
+	}
+	
 	
 	/*Buscar cliente por CPF para cadastro de pedidos*/
 	@PostMapping(value = "/buscacpf")

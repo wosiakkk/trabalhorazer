@@ -25,7 +25,7 @@ $(document).ready(function() {
 					$(wrapper).append(
 						'<div class="form-group">'+
 						'<input type="text" value="'+idproduto+'" name="idproduto"  class="conteudo" hidden>'+
-						'<input type="text" value="'+nomeProduto+'" style="width : 250px">'+" "+" Qd: "+
+						'<input type="text" value="'+nomeProduto+'" style="width : 250px">'+" "+" Qtd: "+
 						'<input type="text" value="'+quantidade+'" name="quantidade" class="conteudo" style="width : 30px">'+
 						'<input type="text" value="'+clientecpf+'" name="clientecpf"  class="conteudo" hidden>'+"    "+
 						'<a type="button" class="remove_field btn waves-effect waves-light">Remover</a>'+
