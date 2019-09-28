@@ -38,6 +38,8 @@ public class Application implements WebMvcConfigurer{
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/js/**").addResourceLocations("classpath:/static/js/");
+		registry.addResourceHandler("/css/**").addResourceLocations("classpath:/static/css/");
+		registry.addResourceHandler("/images/**").addResourceLocations("classpath:/static/images/");
 		registry.addResourceHandler("/fragments/**").addResourceLocations("classpath:/templates/fragments");
 	}
 	

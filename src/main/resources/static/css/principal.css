@@ -1,0 +1,17 @@
+/*bloco de mensagem de erros*/
+.diverro, .erroBack{
+	color : red;
+}
+/*bloco de mensagem de sucesso*/
+.sucessoBack{
+	color : green;
+}
+/*Fixando o menu, com isso é preciso mover a nav bar para a esquerda*/
+.navbar-fixed {
+	padding-left: 300px;
+}
+/*imagem do menu bar*/
+.user-view {
+	width: 299px;
+ 	height: 208px;
+}

@@ -4,6 +4,8 @@
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
+	<!-- Defindo as cor da fonte das mensagens de erros das validações do front e fixando componentes -->
+	<link rel="stylesheet" href="/css/principal.css">
 	<!--Import Google Icon Font-->
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<!--Import materialize.css CDN-->
@@ -18,8 +20,9 @@
 </head>
 <body>
 	<!-- Incluindo a nav bar com thymeleaf -->
-    <nav th:insert="fragments/navbar.html :: nav"></nav>
-
+	<div class="navbar-fixed">
+    	<nav th:insert="fragments/navbar.html :: nav"></nav>
+	</div>
 	<div class="container">
 		<!-- Card do materialize com uma breve descrição -->
 		<div class="card-panel #ef9a9a red lighten-3">
