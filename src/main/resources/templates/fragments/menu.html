@@ -11,14 +11,24 @@
 		</div>
 	</li>
 	<li><div class="divider"></div></li>
-	<li><a th:href="@{/home}" class="collection-item " id="menuInicio">Início</a></li>
+	<li><a th:href="@{/home}" class="collection-item " id="menuInicio">
+			<i class="small material-icons iconesMenu">home</i>
+			Início</a></li>
 	<li><a th:href="@{/cadastrocliente}" class="collection-item" 
-			sec:authorize="hasRole('ROLE_ADMIN')" id="menuCliente">Cadastro de Clientes</a></li>
+			sec:authorize="hasRole('ROLE_ADMIN')" id="menuCliente">
+			<i class="small material-icons iconesMenu">person_add</i>
+			Cadastro de Clientes</a></li>
 	<li><a th:href="@{/cadastroproduto}" class="collection-item" 
-			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuProduto">Cadastro de Produtos</a></li>
+			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuProduto">
+			<i class="small material-icons iconesMenu">control_point</i>
+			Cadastro de Produtos</a></li>
 	<li><a th:href="@{/buscarcliente}" class="collection-item" 
-			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuPedido" >Cadastro de Pedido</a></li>
+			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuPedido" >
+			<i class="small material-icons iconesMenu">playlist_add</i>
+			Cadastro de Pedido</a></li>
 	<li><a th:href="@{/buscarpedidos}" class="collection-item" 
-			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuExibirPedido" >Pesquisa de Pedido</a></li>
+			sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" id="menuExibirPedido" >
+			<i class="small material-icons iconesMenu">search</i>
+			Pesquisa de Pedido</a></li>
 </ul>
 

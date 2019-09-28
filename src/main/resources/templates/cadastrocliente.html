@@ -83,10 +83,11 @@
 								</div>
 								<div class="input-field col s9">
 									<button class="btn waves-effect waves-light" type="submit" name="action">
-										Salvar <i class="material-icons right">send</i>
+										Salvar <i class="material-icons right">save</i>
 									</button>
 									<button class="btn waves-effect waves-light"
 										onclick="document.getElementById('formCliente').reset();">Novo
+										<i class="material-icons right">content_paste</i>
 									</button>
 								</div>
 							</div>
@@ -114,8 +115,10 @@
 								<td th:text = ${cliente.sobrenome}></td>
 								<td th:text = ${cliente.cpf}></td>
 								<!-- Passando um parâmetro com thymeleaf por link para o back -->
-								<td><a class="waves-effect waves-light btn" th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">Editar</a></td>
-								<td><a class="waves-effect waves-light btn" th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">Excluir</a></td>
+								<td><a title="Editar" class="waves-effect waves-light btn" th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">
+									<i class="material-icons right">edit</i></a></td>
+								<td><a title="Excluir" class="waves-effect waves-light btn" th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">
+									<i class="material-icons right">delete</i></a></td>
 							</tr>
 						</tbody>
 					</table>

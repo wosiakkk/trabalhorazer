@@ -15,3 +15,8 @@
 	width: 299px;
  	height: 208px;
 }
+/*Ajuste para alinhas icones*/
+.iconesMenu {
+	position: relative;
+    bottom: 10px; 
+}
