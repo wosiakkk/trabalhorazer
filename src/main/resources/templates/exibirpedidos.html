@@ -81,9 +81,9 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr >
-								<td ></td>
-								<td ></td>
+							<tr th:each="pedido : ${pedidos}">
+								<td th:text="${pedido.id}"></td>
+								<td th:text="${#dates.format(pedido.data, 'dd-MMM-yyyy')}"></td>
 								<td width="50"><button class="addbotao btn waves-effect waves-light">
 								<i class="material-icons">remove_red_eye</i></button> </td>
 							</tr>

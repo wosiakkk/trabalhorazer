@@ -43,7 +43,7 @@ public class PedidoController {
 	private ModelAndView controlePaginaCadastroPedido() {
 		List<String> msgErro = new ArrayList<String>();
 		msgErro.add("Você não pode acessar a página de cadastro sem antes selecionar um cliente!");
-		return MontagemModelAndView("/buscarcliente", new Cliente(), null, msgErro);
+		return MontagemModelAndView("/buscarcliente", new Cliente(),null,  null, msgErro);
 	}
 	
 	@PostMapping(value = "/buscapedidos")
@@ -55,35 +55,26 @@ public class PedidoController {
 			cliente = clienteRepository.buscaPorCpf(cpf);
 			if(cliente != null) {
 				//verificando se ele possui pedidos
-				int numeroDePedidos = pedidoRepository.numeroDePedido(cliente.getId());
-				if(numeroDePedidos > 0) {
-					return MontagemModelAndView("exibirpedidos", cliente, null, null);
+				List<Pedido> pedidos = pedidoRepository.buscarPedidosPorUsuario(cliente.getId());
+			//	int numeroDePedidos = pedidoRepository.numeroDePedido(cliente.getId());
+				if(!pedidos.isEmpty()) {
+					return MontagemModelAndView("exibirpedidos", cliente, pedidos, null, null);
 				}else {
 					List<String> msgErro = new ArrayList<String>();
 					msgErro.add("Este usuário não possui pedidos cadastrados.");
-					return MontagemModelAndView("/buscarpedidos", null, null, msgErro);
+					return MontagemModelAndView("/buscarpedidos", null, null, null, msgErro);
 				}
 			}else {
 				List<String> msgErro = new ArrayList<String>();
 				msgErro.add("CPF Não cadastrado");
-				return MontagemModelAndView("/buscarpedidos", null, null, msgErro);
+				return MontagemModelAndView("/buscarpedidos", null, null, null, msgErro);
 			}
 		} catch (Exception e) {
 			List<String> msgErro = new ArrayList<String>();
 			msgErro.add("Problema ao burcar o registro!");
 			System.out.println("Erro: "+ e.getCause());
-			return MontagemModelAndView("/buscarpedidos", new Cliente(), null, msgErro);
+			return MontagemModelAndView("/buscarpedidos", new Cliente(),null,  null, msgErro);
 		}
-		
-		
-		
-		//int numeroDePedidos = pedidoRepository.numeroDePedido(idcliente);
-	/*	if(numeroDePedidos == 0) {
-			clienteRepository.deleteById(idcliente);
-			List<String> msgSucesso = new ArrayList<String>();
-			msgSucesso.add("Cliente deletado com sucesso!");
-			return MontagemModelAndView("/cadastrocliente", new Cliente(), msgSucesso, null);
-		}*/
 	}
 	
 	
@@ -94,17 +85,17 @@ public class PedidoController {
 		try {
 			busca = clienteRepository.buscaPorCpf(cpf);
 			if(busca!=null) {
-				return MontagemModelAndView("/cadastropedido", busca, null, null);
+				return MontagemModelAndView("/cadastropedido", busca, null, null, null);
 			}else {
 				List<String> msgErro = new ArrayList<String>();
 				msgErro.add("CPF Não cadastrado");
-				return MontagemModelAndView("/buscarcliente", null, null, msgErro);
+				return MontagemModelAndView("/buscarcliente", null, null, null, msgErro);
 			}
 		} catch (Exception e) {
 			List<String> msgErro = new ArrayList<String>();
 			msgErro.add("Problema ao burcar o registro!");
 			System.out.println("Erro: "+ e.getCause());
-			return MontagemModelAndView("/buscarcliente", new Cliente(), null, msgErro);
+			return MontagemModelAndView("/buscarcliente", new Cliente(),null, null, msgErro);
 		}
 	}
 	
@@ -143,7 +134,7 @@ public class PedidoController {
 	
 	/*###############  REFATORAÇÃO ###################
 	 * O trecho de código abaixo se repetia em todos métodos*/
-	private ModelAndView MontagemModelAndView(String view, Cliente cliente,
+	private ModelAndView MontagemModelAndView(String view, Cliente cliente,List<Pedido> pedidos,
 			List<String> msgSucesso, List<String> msgErros) {
 		
 		//Defindo a url de retorno
@@ -153,6 +144,8 @@ public class PedidoController {
 		//Carregando a lista para o datatable
 		Iterable<Produto> produtos = produtoRepository.findAll();
 		modelAndView.addObject("produtos", produtos);
+		//Carregando Lista de Pedidos para exibição
+		modelAndView.addObject("pedidos", pedidos);
 		//carregando mensagens
 		if(msgSucesso != null)
 			modelAndView.addObject("msgSucesso", msgSucesso);
