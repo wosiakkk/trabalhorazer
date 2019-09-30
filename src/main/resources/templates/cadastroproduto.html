@@ -93,10 +93,10 @@
 							<tr th:each="produto : ${produtos}">
 								<td th:text="${produto.id}"></td>
 								<td th:text="${produto.descricao}"></td>
-								<td><a title="Editar" class="waves-effect waves-light btn" th:href="@{/editarproduto/{idproduto}(idproduto=${produto.id})}">
-								<i class="material-icons right">edit</i></a></td>
-								<td><a title="Excluir" class="waves-effect waves-light btn" th:href="@{/excluirproduto/{idproduto}(idproduto=${produto.id})}">
-								<i class="material-icons right">delete</i></a></td>
+								<td width="50"><a title="Editar" class="waves-effect waves-light btn" th:href="@{/editarproduto/{idproduto}(idproduto=${produto.id})}">
+								<i class="material-icons">edit</i></a></td>
+								<td width="50"><a title="Excluir" class="waves-effect waves-light btn" th:href="@{/excluirproduto/{idproduto}(idproduto=${produto.id})}">
+								<i class="material-icons">delete</i></a></td>
 							</tr>
 						</tbody>
 					</table>

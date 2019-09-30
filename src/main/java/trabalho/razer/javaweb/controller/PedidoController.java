@@ -57,7 +57,7 @@ public class PedidoController {
 				//verificando se ele possui pedidos
 				int numeroDePedidos = pedidoRepository.numeroDePedido(cliente.getId());
 				if(numeroDePedidos > 0) {
-					//possui pedidos
+					return MontagemModelAndView("exibirpedidos", cliente, null, null);
 				}else {
 					List<String> msgErro = new ArrayList<String>();
 					msgErro.add("Este usuário não possui pedidos cadastrados.");
@@ -84,7 +84,6 @@ public class PedidoController {
 			msgSucesso.add("Cliente deletado com sucesso!");
 			return MontagemModelAndView("/cadastrocliente", new Cliente(), msgSucesso, null);
 		}*/
-		return null;
 	}
 	
 	

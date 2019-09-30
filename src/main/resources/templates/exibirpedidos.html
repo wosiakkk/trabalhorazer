@@ -38,7 +38,7 @@
 		<div class="col s9" id="conteudo">
 			<div class="container">
 				<div class="col s9">
-					<h4>Cadastro de Pedido</h4>
+					<h4>Pedidos</h4>
 					<br/>
 					<!-- Div para exbir mensagens de validações do back-end -->
 					<!-- Varrendo a lista de erros com thymeleaf --> 
@@ -71,23 +71,21 @@
 					</div>
 					<br/>
 					
-					<h4>Lista de Produtos</h4>
+					<h4>Lista de Pedidos</h4>
 					<table class="striped" id="tabelaProdutos">
 						<thead>
 							<tr>
 								<th>ID:</th>
-								<th>Descrição:</th>
-								<th>Quantidade:</th>
-								<th>Add:</th>
+								<th>Data:</th>
+								<th>Visualizar:</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="produto : ${produtos}">
-								<td th:text="${produto.id}" class="idProduto"></td>
-								<td th:text="${produto.descricao}" class="descProduto"></td>
-								<td><input type="number" class="quantidade"  style="width: 40px" min="1" step="1"></td>
+							<tr >
+								<td ></td>
+								<td ></td>
 								<td width="50"><button class="addbotao btn waves-effect waves-light">
-								<i class="material-icons">add_circle_outline</i></button> </td>
+								<i class="material-icons">remove_red_eye</i></button> </td>
 							</tr>
 						</tbody>
 					</table>
@@ -95,18 +93,7 @@
 	    				<span class="left" id="total_reg"></span>
             			<ul class="pagination pager" id="paginacao"></ul>
          			 </div>
-         			 <br/>
-         			 <br/>
-         			 <div class="col s9">
-	         			 <h4>Lista de Produtos adicionados</h4>
-		         		<div class="card-panel #e8eaf6 indigo lighten-5">
-		         			 <div id="itens"></div>
-		         		</div>
-		         	</div>
-		         	<div class="col s9">
-		         		<button id="enviar" class="btn waves-effect waves-light">Salvar
-		         		<i class="material-icons right">save</i></button>
-		         	</div>
+         			
 				</div>
 			</div>
 			

@@ -115,10 +115,10 @@
 								<td th:text = ${cliente.sobrenome}></td>
 								<td th:text = ${cliente.cpf}></td>
 								<!-- Passando um parâmetro com thymeleaf por link para o back -->
-								<td><a title="Editar" class="waves-effect waves-light btn" th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">
-									<i class="material-icons right">edit</i></a></td>
-								<td><a title="Excluir" class="waves-effect waves-light btn" th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">
-									<i class="material-icons right">delete</i></a></td>
+								<td width="50"><a title="Editar" class="waves-effect waves-light btn" th:href="@{/editarcliente/{idcliente}(idcliente=${cliente.id})}">
+									<i class="material-icons">edit</i></a></td>
+								<td width="50"><a title="Excluir" class="waves-effect waves-light btn" th:href="@{/excluircliente/{idcliente}(idcliente=${cliente.id})}">
+									<i class="material-icons">delete</i></a></td>
 							</tr>
 						</tbody>
 					</table>
