@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -75,6 +76,15 @@ public class PedidoController {
 			System.out.println("Erro: "+ e.getCause());
 			return MontagemModelAndView("/buscarpedidos", new Cliente(),null,  null, msgErro);
 		}
+	}
+	
+	@GetMapping(value = "/itens/{id}", produces = "application/json")
+	private @ResponseBody List<ItemDoPedido> buscarItensPedido(@PathVariable(value = "id")Long id) {
+		
+		List<ItemDoPedido> itens = pedidoRepository.itens(id);
+		System.out.println(itens);
+		
+		return itens;
 	}
 	
 	

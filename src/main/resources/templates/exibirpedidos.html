@@ -11,8 +11,7 @@
 	<!--Import materialize.css CDN-->
 	<!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-	<!-- Compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	
 	<!-- JQuery -->
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<!-- Jquery validate -->
@@ -82,9 +81,9 @@
 						</thead>
 						<tbody>
 							<tr th:each="pedido : ${pedidos}">
-								<td th:text="${pedido.id}"></td>
+								<td th:text="${pedido.id}" class="idPedido"></td>
 								<td th:text="${#dates.format(pedido.data, 'dd-MMM-yyyy')}"></td>
-								<td width="50"><button class="addbotao btn waves-effect waves-light">
+								<td width="50"><button class="buscarItens btn waves-effect waves-light">
 								<i class="material-icons">remove_red_eye</i></button> </td>
 							</tr>
 						</tbody>
@@ -96,7 +95,18 @@
          			
 				</div>
 			</div>
-			
+  			<!-- Estrutura Modal -->
+ 			<div id="modalPedidos" class="modal modal-fixed-footer">
+  				<div class="modal-content">
+  					<h5>Quantidade de produtos:</h5>
+  					<!-- Dados preenchidos com o retorno da requisição Ajax -->
+  					
+   				</div>
+    			<div class="modal-footer">
+     				 <a href="#!" class="modal-close btn waves-effect waves-light">Fechar</a>
+    			</div>
+  			</div>
+  			
 		</div>
 	</div>
 	<!-- Script que controla toda a tela e envia dados a controller -->
@@ -107,11 +117,16 @@
 	<script src="/js/validacaoCadProduto.js"></script>
 	<!-- Impotando o js para criar mascaras no form -->
 	<script src="/js/mascaraCadCliente.js"></script>
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<!-- Script para controlar o active do menu lateral -->
 	<script type="text/javascript">
 		$( document ).ready(function() {
-			$("#menuPedido").addClass('active').siblings().removeClass('active');
+			$("#menuExibirPedido").addClass('active').siblings().removeClass('active');
 		});
+		$("#modalPedidos").modal();
 	</script>
+	<!-- Script para controle do modal de exibição de itens do pedido (ajax) -->
+	<script src="/js/exibicaoItensPedido.js"></script>
 </body>
 </html>

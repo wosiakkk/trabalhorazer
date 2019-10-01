@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
+import trabalho.razer.javaweb.model.ItemDoPedido;
 import trabalho.razer.javaweb.model.Pedido;
 
 public interface PedidoRepository extends CrudRepository<Pedido, Long> {
@@ -13,4 +14,7 @@ public interface PedidoRepository extends CrudRepository<Pedido, Long> {
 	Integer numeroDePedido(Long id);
 	@Query(value = "select p from Pedido p where p.cliente.id = ?1")
 	List<Pedido> buscarPedidosPorUsuario(Long id);
+	
+	@Query(value = "select i from ItemDoPedido i where i.pedido.id = ?1")
+	List<ItemDoPedido> itens(Long idpedido);
 }

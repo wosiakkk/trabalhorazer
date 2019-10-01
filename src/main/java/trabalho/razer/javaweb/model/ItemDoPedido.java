@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 /*Classe para maniplar objetos da tabela auxilar da relação manytomany entre Pedido e Produtos.*/
 
 @Entity
@@ -24,6 +26,7 @@ public class ItemDoPedido implements Serializable{
 	@ManyToOne
 	@MapsId("idpedido") //key da classe ItemDoPedidoId
 	@JoinColumn(name = "id_pedido")
+	@JsonIgnore
 	private Pedido pedido;
 	
 	@ManyToOne
